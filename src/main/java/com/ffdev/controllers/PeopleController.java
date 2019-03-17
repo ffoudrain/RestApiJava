@@ -1,6 +1,8 @@
 package com.ffdev.controllers;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +22,9 @@ public class PeopleController {
 	public Iterable<People> listPeople(){
 		return peopleService.findAll();
 		
+	}
+	@GetMapping(path="/{id}")
+	public Optional<People> find(Integer id) {
+		return peopleService.find(id);
 	}
 }

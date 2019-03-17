@@ -2,6 +2,7 @@ package com.ffdev.services;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import com.ffdev.models.People;
 
@@ -9,6 +10,6 @@ public interface PeopleService {
 
 	public List<People> findAll();
 	
-	public People find(String id);
+	public Optional<People> find(Integer id);
 	
 }

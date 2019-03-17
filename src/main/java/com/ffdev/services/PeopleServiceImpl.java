@@ -2,6 +2,7 @@ package com.ffdev.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class PeopleServiceImpl implements PeopleService {
 	}
 
 	@Override
-	public People find(String id) {
-		return null;
+	public Optional<People> find(Integer id) {
+		return peopleRepository.findById(id);
 	}
 
 }
