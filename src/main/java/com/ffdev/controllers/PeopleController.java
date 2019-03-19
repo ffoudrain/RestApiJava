@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class PeopleController {
 		
 	}
 	@GetMapping(path="/{id}")
-	public Optional<People> find(Integer id) {
+	public Optional<People> find(@PathVariable Integer id) {
 		return peopleService.find(id);
 	}
 }

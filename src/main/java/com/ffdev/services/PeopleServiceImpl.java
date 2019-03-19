@@ -27,5 +27,5 @@ public class PeopleServiceImpl implements PeopleService {
 	public Optional<People> find(Integer id) {
 		return peopleRepository.findById(id);
 	}
-
+	
 }
