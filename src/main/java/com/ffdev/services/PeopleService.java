@@ -15,4 +15,6 @@ public interface PeopleService {
     public People saved(People people );
 
     public void delete(Integer id);
+
+    public Long number();
 }

@@ -29,14 +29,20 @@ public class PeopleServiceImpl implements PeopleService {
 	}
 
     @Override
-    public People saved(People people ){
+    public People saved(People people ) {
         return peopleRepository.save(people);
     }
 
     @Override
-    public void delete(Integer id){
+    public void delete(Integer id) {
         Optional<People> optinalPeople = peopleRepository.findById(id);
         People p = optinalPeople.get();  
         peopleRepository.delete(p);
+    }
+
+    @Override
+    public Long number()
+    {
+		return peopleRepository.count();  
     }
 }
