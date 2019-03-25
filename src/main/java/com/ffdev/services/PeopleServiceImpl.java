@@ -15,7 +15,7 @@ public class PeopleServiceImpl implements PeopleService {
 
 	@Autowired(required=true)
 	private PeopleRepository peopleRepository;
-	
+
 	@Override
 	public List<People> findAll() {
 		List<People> peoples = new ArrayList<People>();
@@ -27,5 +27,9 @@ public class PeopleServiceImpl implements PeopleService {
 	public Optional<People> find(Integer id) {
 		return peopleRepository.findById(id);
 	}
-	
+
+    @Override
+    public People saved(People people ){
+        return peopleRepository.save(people);
+    }
 }

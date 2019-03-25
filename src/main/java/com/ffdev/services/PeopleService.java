@@ -9,7 +9,8 @@ import com.ffdev.models.People;
 public interface PeopleService {
 
 	public List<People> findAll();
-	
+
 	public Optional<People> find(Integer id);
-	
+
+    public People saved(People people );
 }
