@@ -41,7 +41,7 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public Long number()
+    public Long count()
     {
 		return peopleRepository.count();  
     }

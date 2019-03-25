@@ -50,7 +50,7 @@ public class PeopleController {
     }
 
     @GetMapping(path = "/count")
-    public Long number() {
-        return peopleService.number();
+    public Long count() {
+        return peopleService.count();
     }
 }

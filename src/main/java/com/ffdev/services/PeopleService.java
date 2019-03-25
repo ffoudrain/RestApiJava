@@ -16,5 +16,5 @@ public interface PeopleService {
 
     public void delete(Integer id);
 
-    public Long number();
+    public Long count();
 }
