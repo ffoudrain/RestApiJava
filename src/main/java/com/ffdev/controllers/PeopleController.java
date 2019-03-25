@@ -31,26 +31,38 @@ public class PeopleController {
 		return peopleService.find(id);
 	}
 
-    @GetMapping(path="/add") // Map ONLY GET Requests
+    @GetMapping(path="/add/{lName}/{fName}/{age}") // Map ONLY GET Requests
 	public @ResponseBody String addNewUser (@RequestParam String lName
-			, @RequestParam String fName, @RequestParam Integer age) {
+			, @RequestParam String fName, @RequestParam String age) {
+        try{
+            People p = new People();
+            p.setLastName(lName);
+            p.setFirstName(fName);
+            p.setAge(Integer.valueOf(age));
+            peopleService.saved(p);
 
-		People p = new People();
-		p.setFirstName(lName);
-		p.setLastName(fName);
-        p.setAge(age);
-        peopleService.saved(p);
-		return "Saved";
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error : " + e);
+        }
+        return "Saved";
 	}
 
     // delete people by id
-    @GetMapping(path = "/delete/{id}") 
+    @GetMapping(path = "/delete/{id}")
     public void delete (@PathVariable Integer id) {
-        peopleService.delete(id);
+        try{
+            peopleService.delete(id);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
     }
 
     @GetMapping(path = "/count")
-    public Long count() {
-        return peopleService.count();
+    public String count() {
+        return peopleService.count().toString();
     }
 }

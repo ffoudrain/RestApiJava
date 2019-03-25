@@ -35,9 +35,14 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Override
     public void delete(Integer id) {
-        Optional<People> optinalPeople = peopleRepository.findById(id);
-        People p = optinalPeople.get();  
-        peopleRepository.delete(p);
+        try {
+            Optional<People> optinalPeople = peopleRepository.findById(id);
+            People p = optinalPeople.get();  
+            peopleRepository.delete(p);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     @Override
