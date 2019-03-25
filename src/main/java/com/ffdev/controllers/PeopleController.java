@@ -42,4 +42,10 @@ public class PeopleController {
         peopleService.saved(p);
 		return "Saved";
 	}
+    
+    // delete people by id
+    @GetMapping(path = "/delete/{id}") 
+    public void delete (@PathVariable Integer id) {
+        peopleService.delete(id);
+    }
 }

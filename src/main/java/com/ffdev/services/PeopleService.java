@@ -13,4 +13,6 @@ public interface PeopleService {
 	public Optional<People> find(Integer id);
 
     public People saved(People people );
+
+    public void delete(Integer id);
 }

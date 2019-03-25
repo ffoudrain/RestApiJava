@@ -32,4 +32,11 @@ public class PeopleServiceImpl implements PeopleService {
     public People saved(People people ){
         return peopleRepository.save(people);
     }
+
+    @Override
+    public void delete(Integer id){
+        Optional<People> optinalPeople = peopleRepository.findById(id);
+        People p = optinalPeople.get();  
+        peopleRepository.delete(p);
+    }
 }
