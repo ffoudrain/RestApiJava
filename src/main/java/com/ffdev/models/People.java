@@ -19,6 +19,7 @@ public class People {
 	private String lastName;
 	@Column(name = "firstName")
 	private String firstName;
+    @Column(name = "age")
 	private Integer age;
 	
 	public People() {

@@ -4,11 +4,13 @@ package com.ffdev.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ffdev.models.People;
@@ -31,23 +33,24 @@ public class PeopleController {
 		return peopleService.find(id);
 	}
 
-    @GetMapping(path="/add/{lName}/{fName}/{age}") // Map ONLY GET Requests
-	public @ResponseBody String addNewUser (@RequestParam String lName
-			, @RequestParam String fName, @RequestParam String age) {
-        try{
-            People p = new People();
-            p.setLastName(lName);
-            p.setFirstName(fName);
-            p.setAge(Integer.valueOf(age));
-            peopleService.saved(p);
+    //les valeurs sont passées dans l'url
+    @RequestMapping(value = "/add", method = RequestMethod.POST,
+        consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public void addPeople(@RequestParam String firstname, @RequestParam String lastname, @RequestParam Integer age) {
+        People p = new People();
+        p.setFirstName(firstname);
+        p.setLastName(lastname);
+        Integer ageC = Integer.valueOf(age);
+        p.setAge(ageC);
+        peopleService.saved(p);
+    }
 
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error : " + e);
-        }
-        return "Saved";
-	}
+    //les valeurs sont passées en JSON
+    @RequestMapping(value = "/addp", method = RequestMethod.POST,
+        consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public void addPeoples(@RequestBody People p) {
+        peopleService.saved(p);
+    }
 
     // delete people by id
     @GetMapping(path = "/delete/{id}")
