@@ -3,6 +3,7 @@ package com.ffdev.controllers;
 
 import java.util.Optional;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class PeopleController {
 		return peopleService.findAll();
 
 	}
+
 	@GetMapping(path="/{id}")
 	public Optional<People> find(@PathVariable Integer id) {
 		return peopleService.find(id);
@@ -36,7 +38,7 @@ public class PeopleController {
     //les valeurs sont passées dans l'url
     @RequestMapping(value = "/add", method = RequestMethod.POST,
         consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public void addPeople(@RequestParam String firstname, @RequestParam String lastname, @RequestParam Integer age) {
+    public void addPeople(@RequestParam String firstname, @RequestParam String lastname, @RequestParam String age) {
         People p = new People();
         p.setFirstName(firstname);
         p.setLastName(lastname);
@@ -45,27 +47,27 @@ public class PeopleController {
         peopleService.saved(p);
     }
 
-    //les valeurs sont passées en JSON
+    // Les valeurs sont passées en JSON.
     @RequestMapping(value = "/addp", method = RequestMethod.POST,
         consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public void addPeoples(@RequestBody People p) {
         peopleService.saved(p);
     }
 
-    // delete people by id
+    // Delete people by id.
     @GetMapping(path = "/delete/{id}")
     public void delete (@PathVariable Integer id) {
         try{
             peopleService.delete(id);
         }
-        catch(Exception e){
-            System.out.println(e);
+        catch(Exception lException){
+            Logger.getLogger(String.valueOf(lException));
         }
 
     }
 
     @GetMapping(path = "/count")
     public String count() {
-        return peopleService.count().toString();
+        return peopleService.count();
     }
 }

@@ -37,7 +37,7 @@ public class PeopleServiceImpl implements PeopleService {
     public void delete(Integer id) {
         try {
             Optional<People> optinalPeople = peopleRepository.findById(id);
-            People p = optinalPeople.get();  
+            People p = optinalPeople.get();
             peopleRepository.delete(p);
         }
         catch(Exception e){
@@ -46,8 +46,8 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public Long count()
+    public String count()
     {
-		return peopleRepository.count();  
+		return String.valueOf(peopleRepository.count());
     }
 }
